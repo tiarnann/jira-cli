@@ -276,6 +276,14 @@ export default class JiraIssues {
 			{ 'Priority': issue.fields.priority.name }
 		);
 
+		let components = issue.fields.components.reduce((accum, obj)=> `${accum}${obj.name}	`,``)
+		let labels = issue.fields.labels.join('	')
+
+		table.push(
+			{'Components': color.green(components)},
+			{'Labels': color.red(labels)}
+		);
+
 		// Start with detail table
 		table.push(
 				{ '': '' }
