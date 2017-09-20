@@ -488,4 +488,26 @@ export default class JiraIssues {
 			});
 		}
 	}
+
+	async updateIssue(issueId, updateObject){
+		return jira.api.updateIssue(issueId, updateObject)
+	}
+
+	 addComponents( issueId , component){
+		let updateObject = {
+			"update" : { 
+				"components" : [{"add" : {"name" : component}}]
+			}
+		}	
+		let config = jira.config.defaults;
+
+		this.updateIssue(issueId, updateObject).then(function(result){
+			console.log();
+			console.log( color.green(`  Issue ${issueId} assigned component: ${component}`) );
+			console.log();
+		}).catch(function( res ){
+			jira.showErrors( res );
+			process.exit();
+		});
+	}
 }
