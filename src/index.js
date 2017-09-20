@@ -10,10 +10,6 @@ import jira from './jira';
 jira.init().then(function(){
 
 
-	/**
-	 * Create issue
-	 */
-
 	cl
 	  .command('create [options]')
 	  .description('Create a new issue')
@@ -76,7 +72,9 @@ jira.init().then(function(){
 	  .option("-u, --user <username>", "Set the user name")
 	  .option("-a, --assign <username>", "Assign issue to a user")
 	  .option("-t, --transition [transitionName]", "Make issue transition")
-	  .option("-h, --help", "")
+		.option("-h, --help", "")
+		.option("-c, --components <componentName>", "Add component to issue")
+		.option("-l, --labels <labelName>", "Add label to issue")
 	  .action((c, o) => {
 	  	jira.cmdIssue(c, o);
 	  });
