@@ -279,7 +279,14 @@ class JiraCLI {
 				this.issues.makeTransition( args, options.transition);
 			} else {
 				// If none of the above options is passed then search for specific issue
-				this.issues.findIssue( args );
+				
+				if (options.components){
+					this.issues.addComponents(args, options.components)
+				} else if (options.labels){
+					this.issues.addLabels(args, options.labels)
+				} else {
+					this.issues.findIssue( args );
+				}
 			}
 		}
 	}

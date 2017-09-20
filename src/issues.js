@@ -493,13 +493,35 @@ export default class JiraIssues {
 		return jira.api.updateIssue(issueId, updateObject)
 	}
 
-	 addComponents( issueId , component){
+	addLabels(issueId , label){
 		let updateObject = {
 			"update" : { 
-				"components" : [{"add" : {"name" : component}}]
+				"labels" : [
+					{"add" : label}
+				]
 			}
-		}	
-		let config = jira.config.defaults;
+		}
+
+		this.updateIssue(issueId, updateObject).then(function(result){
+			console.log();
+			console.log( color.green(`  Issue ${issueId} assigned label: ${label}`) );
+			console.log();
+		}).catch(function( res ){
+			jira.showErrors( res );
+			process.exit();
+		});
+	}
+
+	addComponents(issueId , component){
+		let updateObject = {
+			"update" : { 
+				"components" : [
+					{"add" : 
+						{"name" : component}
+					}
+				]
+			}
+		}
 
 		this.updateIssue(issueId, updateObject).then(function(result){
 			console.log();
