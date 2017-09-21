@@ -7,7 +7,7 @@ import opn from 'opn';
 
 // Local
 import jira from '../jira';
-import Issues from '../issues'
+import Issues from './issues'
 
 export default class JiraLabels {
     constructor(){
@@ -15,22 +15,32 @@ export default class JiraLabels {
     }
 
 	createUpdateObject(action, name){
-		switch (action) {
-			case "add":
-			case "remove":
-			case "set": break
-			default:
-				throw new Error(`Unknown action: ${action}`)
-		}
-		let obj =  {
+        let obj =  {
 			"update" : { 
 				"labels" : [
 				]
 			}
         }
         let op = {}
-        op[action] = name
-        obj.update.labels.push(op)
+
+		switch (action) {
+			case "add":
+            case "remove":
+                op[action] = name
+                obj.update.labels.push(op)
+                break
+            case "set":
+                op[action] = []
+                op[action].push(name)
+                obj.update.labels.push(op)
+                break
+			default:
+				throw new Error(`Unknown action: ${action}`)
+		}
+
+        
+        
+        
         return obj
 	}
 
@@ -58,7 +68,7 @@ export default class JiraLabels {
     updateIssueWithObject(issueId, updateObject){
         let _this = this
         return jira.api.updateIssue(issueId, updateObject).then(function(result){
-            _this.issues.findIssue(issueId)       
+            _this.issues.findIssue(issueId)   
 		}).catch(function( res ){
 			jira.showErrors( res );
 			process.exit();
