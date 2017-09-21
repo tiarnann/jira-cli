@@ -280,11 +280,13 @@ class JiraCLI {
 				//Make issue transition
 				this.issues.makeTransition( args, options.transition);
 			} else {
-				// If none of the above options is passed then search for specific issue
-				
 				if (options.components){
-					this.components.askForComponentAction(args, options.components)
-					//this.issues.addComponents(args, options.components)
+					// No component argument passed
+					if(options.components === true){
+						this.components.askForComponent(args)
+					} else {
+						this.components.askForComponentAction(args, options.components)
+					}
 				} 
 				else if (options.labels){
 					this.issues.addLabels(args, options.labels)
