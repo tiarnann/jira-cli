@@ -13,6 +13,7 @@ import Config from './config';
 import Boards from './boards';
 import Issues from './issues/issues';
 import Components from './issues/components';
+import Labels from './issues/labels';
 import Projects from './projects';
 import Users from './users';
 import Versions from './versions';
@@ -33,6 +34,7 @@ class JiraCLI {
 		this.boards = new Boards;
 		this.issues = new Issues;
 		this.components = new Components;
+		this.labels = new Labels;
 		this.projects = new Projects;
 		this.users = new Users;
 		this.versions = new Versions;
@@ -289,7 +291,7 @@ class JiraCLI {
 					}
 				} 
 				else if (options.labels){
-					this.issues.addLabels(args, options.labels)
+					this.labels.askForLabelAction(args, options.labels)
 				} else {
 					this.issues.findIssue( args );
 				}
