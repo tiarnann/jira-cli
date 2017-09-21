@@ -1,3 +1,23 @@
+## What the fork?
+When using JIRA, I usually use components and labels. 
+
+1. I added the ability to add,set,remove components using
+````bash
+	jira i <issue-name> -c [component-name]
+	jira i <issue-name> --components [component-name]
+````
+The component name is optional, if you don't assign one. You'll be prompted to select one from all your available components in that issue's project. Then you'll be asked for the action to make add,remove,set the selected component.
+
+2. I did the same thing-ish for labels.
+````bash
+	jira i <issue-name> -l [label-name]
+	jira i <issue-name> --labels [label-name]
+````
+Again, you'll be asked for the action to make add,remove,set the selected label. 
+
+Enjoy! :v:
+
+
 # jira-cli
 
 This is a command line client Jira API, useful to create new issues.
@@ -20,3 +40,5 @@ To get detailed information about JIRA-CLI usage please visit the documentation 
 
 Copyright (c) 2017 by Miguel Henao & Eduardo Henao
 Licensed under the MIT license.
+
+
