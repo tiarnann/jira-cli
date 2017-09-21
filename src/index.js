@@ -16,8 +16,7 @@ jira.init().then(function(){
 	  .option("-s, --self", "Assign the new issue to the current user")
 	  .action((c, o) => {
 	  	jira.cmdCreate(c, o);
-	  });
-
+		});
 
 	/**
 	 * Open in browser
@@ -73,7 +72,7 @@ jira.init().then(function(){
 	  .option("-a, --assign <username>", "Assign issue to a user")
 	  .option("-t, --transition [transitionName]", "Make issue transition")
 		.option("-h, --help", "")
-		.option("-c, --components <componentName>", "Add component to issue")
+		.option("-c, --components [componentName]", "Add component to issue")
 		.option("-l, --labels <labelName>", "Add label to issue")
 	  .action((c, o) => {
 	  	jira.cmdIssue(c, o);
