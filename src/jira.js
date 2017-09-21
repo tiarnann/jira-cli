@@ -11,7 +11,8 @@ import color from 'chalk';
 // Local
 import Config from './config';
 import Boards from './boards';
-import Issues from './issues';
+import Issues from './issues/issues';
+import Components from './issues/components';
 import Projects from './projects';
 import Users from './users';
 import Versions from './versions';
@@ -31,6 +32,7 @@ class JiraCLI {
 		this.config = new Config;
 		this.boards = new Boards;
 		this.issues = new Issues;
+		this.components = new Components;
 		this.projects = new Projects;
 		this.users = new Users;
 		this.versions = new Versions;
@@ -281,8 +283,10 @@ class JiraCLI {
 				// If none of the above options is passed then search for specific issue
 				
 				if (options.components){
-					this.issues.addComponents(args, options.components)
-				} else if (options.labels){
+					this.components.askForComponentAction(args, options.components)
+					//this.issues.addComponents(args, options.components)
+				} 
+				else if (options.labels){
 					this.issues.addLabels(args, options.labels)
 				} else {
 					this.issues.findIssue( args );
